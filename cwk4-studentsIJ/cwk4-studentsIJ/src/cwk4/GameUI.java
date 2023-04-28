@@ -80,11 +80,16 @@ public class GameUI
              {
                  System.out.println("Write to file");
 
-                 ((SpaceWars) gp).saveGame("olenka.txt");
+                 gp.saveGame("olenka.txt");
              }
              else if (choice == 10) // Task 3.5 only
              {
                  System.out.println("Restore from file");
+                 WIN restoredFile = gp.restoreGame("olenka.txt");
+                 if (restoredFile == null) {
+                     System.out.println("Error loading saved game.");
+                     continue;
+                 }
                  gp = gp.restoreGame("olenka.txt");
                  System.out.println(gp.toString());
              }
@@ -131,14 +136,14 @@ public class GameUI
     }
     
     private String battleTextResult(int code) {
-        switch (code) {
-            case 0: return "Battle won.";
-            case 1: return "Battle lost: no suitable force available.";
-            case 2: return "Battle lost: enemy force was stronger than player's";
-            case 3: return "Battle lost: Admiral is defeated.";
-            case -1: return "No such battle";
-            default: return "Error";
-        }
+        return switch (code) {
+            case 0 -> "Battle won.";
+            case 1 -> "Battle lost: no suitable force available.";
+            case 2 -> "Battle lost: enemy force was stronger than player's";
+            case 3 -> "Battle lost: Admiral is defeated.";
+            case -1 -> "No such battle";
+            default -> "Error";
+        };
     }
     
     public static void main(String[] args)

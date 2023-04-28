@@ -519,7 +519,6 @@ public class SpaceWars implements WIN, Serializable
 
          catch (Exception e) {
              e.printStackTrace();
-
          }
          return null;
      }
