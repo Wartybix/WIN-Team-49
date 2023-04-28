@@ -16,6 +16,7 @@ public class GameGUI
     private JFrame myFrame = new JFrame("Game GUI");
 
     private JTextArea listing = new JTextArea();
+    private JScrollPane scrollPane;
     private JLabel codeLabel = new JLabel ();
     private JButton fightBtn = new JButton("Fight");
     private JButton viewStateBtn = new JButton("View Game State");
@@ -74,6 +75,12 @@ public class GameGUI
         myFrame.setLayout(new BorderLayout());
         myFrame.add(listing,BorderLayout.CENTER);
         listing.setVisible(false);
+
+        scrollPane = new JScrollPane(listing, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); //Allows the listing area to be scrolled
+
+        myFrame.add(scrollPane);
+
         myFrame.add(eastPanel, BorderLayout.EAST);
         // set panel layout and add components
         eastPanel.setLayout(new GridLayout(4,1));
@@ -184,7 +191,7 @@ public class GameGUI
 
     private class ClearBtnHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            listing.setVisible(false);
+            listing.setText(null);
         }
     }
     
