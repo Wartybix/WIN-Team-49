@@ -147,6 +147,9 @@ public class GameGUI
     private class ActivateForceHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String input = JOptionPane.showInputDialog("Enter the force's fleet reference: ");
+            if (input == null) {
+                return;
+            }
             int result = gp.activateForce(input);
             JOptionPane.showMessageDialog(myFrame, activation(result));
         }
@@ -155,7 +158,12 @@ public class GameGUI
     private class RecallForceHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String input = JOptionPane.showInputDialog("Enter the force's fleet reference: ");
+            if (input == null) {
+                return;
+            }
             JOptionPane.showMessageDialog(myFrame, "Recalling force...");
+            /*WIN interface does not allow the recall force method to return a code, so no status about
+            force recall success/failure can be output.*/
             gp.recallForce(input);
         }
     }
@@ -176,9 +184,18 @@ public class GameGUI
         { 
             int result = -1;
             String inputValue = JOptionPane.showInputDialog("Fight number ?: ");
-            int num = Integer.parseInt(inputValue);
-            result = gp.doBattle(num);
-            JOptionPane.showMessageDialog(myFrame,fighting(result));
+            if (inputValue == null) {
+                return;
+            }
+            try {
+                int num = Integer.parseInt(inputValue);
+                result = gp.doBattle(num);
+                JOptionPane.showMessageDialog(myFrame,fighting(result));
+            } catch (NumberFormatException exception) {
+                exception.printStackTrace();
+                JOptionPane.showMessageDialog(myFrame, "Not a valid number.");
+            }
+
         }
     }
 
