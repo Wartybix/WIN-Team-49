@@ -58,6 +58,7 @@ public class GameUI
                     System.out.println(battleTextResult(result));
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input.");
+                    myIn.nextLine(); //Flushes the user input
                 }
             }
             
@@ -118,10 +119,16 @@ public class GameUI
         while (choice < 0 || choice  > 10)
         {
             System.out.print("Enter the number of your choice: ");
-            choice =  myIn.nextInt();
+            try {
+                choice =  myIn.nextInt();
+            } catch (InputMismatchException e) {
+                choice = -1;
+                System.out.println("Not a valid number.");
+                myIn.nextLine(); //Flushes the inputted text so that the while loop does not get stuck running infinitely.
+            }
         }
         return choice;        
-    } 
+    }
     
     private String activation(int code)
     {
