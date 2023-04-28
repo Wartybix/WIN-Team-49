@@ -75,6 +75,7 @@ public class GameGUI
         myFrame.setLayout(new BorderLayout());
         myFrame.add(listing,BorderLayout.CENTER);
         listing.setVisible(false);
+        listing.setEditable(false);
 
         scrollPane = new JScrollPane(listing, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); //Allows the listing area to be scrolled
