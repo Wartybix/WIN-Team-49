@@ -83,4 +83,13 @@ public class Battle implements Serializable{
     public int getGains() {
         return gains;
     }
+
+    /**
+     * Returns whether battle can be won by an eligible force with the passed force strength
+     * @param forceStrength the force strength of the force to test
+     * @return true Boolean value if battle will be won, false Boolean value if battle will be lost
+     */
+    public boolean battleVictory(int forceStrength) {
+        return forceStrength >= getEnemyStrength();
+    }
 }
