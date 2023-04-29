@@ -324,11 +324,13 @@ public class SpaceWars implements WIN, Serializable
         if (playerForce == null || !bat.battleVictory(playerForce.getBattleStrength())) {
             warChest -= bat.getLosses();
 
-            if (playerForce == null) {
+            if (playerForce == null && !isDefeated()) {
                 return 1;
             }
 
-            playerForce.destroy();
+            if (playerForce != null) {
+                playerForce.destroy();
+            }
 
             if (isDefeated()) {
                 return 3;
