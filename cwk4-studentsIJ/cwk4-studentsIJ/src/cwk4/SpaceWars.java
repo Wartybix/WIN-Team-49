@@ -141,7 +141,7 @@ public class SpaceWars implements WIN, Serializable
             s += "\nNo destroyed forces";
         } else {
             for (Force force : destroyedForces) {
-                s += "\n" + force.toString();
+                s += "\n" + force.toString() + "\n";
             }
         }
         
@@ -227,7 +227,7 @@ public class SpaceWars implements WIN, Serializable
             s += "No forces activated";
         } else {
             for (Force force : asf) {
-                s += "\n" + force.toString();
+                s += "\n" + force.toString() + "\n";
             }
         }
 
