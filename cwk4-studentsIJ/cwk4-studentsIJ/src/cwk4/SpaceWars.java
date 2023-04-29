@@ -321,7 +321,7 @@ public class SpaceWars implements WIN, Serializable
 
         Force playerForce = matchForceToBattle(bat);
 
-        if (playerForce == null || playerForce.getBattleStrength() < bat.getEnemyStrength()) {
+        if (playerForce == null || !bat.battleVictory(playerForce.getBattleStrength())) {
             warChest -= bat.getLosses();
 
             if (playerForce == null) {

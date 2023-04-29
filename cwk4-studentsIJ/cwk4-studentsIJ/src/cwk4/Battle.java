@@ -83,4 +83,8 @@ public class Battle implements Serializable{
     public int getGains() {
         return gains;
     }
+
+    public boolean battleVictory(int forceStrength) {
+        return forceStrength >= getEnemyStrength();
+    }
 }
