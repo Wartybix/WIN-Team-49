@@ -75,9 +75,11 @@ public class GameUI
                 System.out.print("Enter force reference: ");
                 myIn.nextLine();
                 String ref = (myIn.nextLine()).trim();
+                System.out.println("Recalling force...");
                 gp.recallForce(ref);
-                System.out.println("Force recalled");
-                System.out.println(gp.getForceDetails(ref));
+
+                /*No status about the force recall can be displayed, as the WIN interface does not allow the recall
+                force method to return a code*/
                 
             }
             else if (choice==8) //view game state
