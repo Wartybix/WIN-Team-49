@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Provide a GUI interface for the game
  * 
- * @author A.A.Marczyk
+ * @author A.A.Marczyk, Lewis Turnbull
  * @version 20/10/23
  */
 public class GameGUI
@@ -41,19 +41,23 @@ public class GameGUI
         // create the Forces menu
         JMenu forcesMenu = new JMenu("Forces");
         menubar.add(forcesMenu);
-        
+
+        // List all forces menu item
         JMenuItem listForcesItem = new JMenuItem("List All Forces ");
         listForcesItem.addActionListener(new ListForcesHandler());
         forcesMenu.add(listForcesItem);
 
+        // List ASF menu item
         JMenuItem listASFItem = new JMenuItem("List ASF");
         listASFItem.addActionListener(new ListASFHandler());
         forcesMenu.add(listASFItem);
 
+        // Activate force menu item
         JMenuItem activateForceItem = new JMenuItem("Activate Force");
         activateForceItem.addActionListener(new ActivateForceHandler());
         forcesMenu.add(activateForceItem);
 
+        // Recall force menu item
         JMenuItem recallForceItem = new JMenuItem("Recall Force");
         recallForceItem.addActionListener(new RecallForceHandler());
         forcesMenu.add(recallForceItem);
@@ -63,6 +67,7 @@ public class GameGUI
         JMenu battlesMenu = new JMenu("Battles");
         menubar.add(battlesMenu);
 
+        // List battles menu item
         JMenuItem listBattlesItem = new JMenuItem("List Battles");
         listBattlesItem.addActionListener(new ListBattlesHandler());
         battlesMenu.add(listBattlesItem);
@@ -102,6 +107,11 @@ public class GameGUI
         myFrame.setVisible(true);
     }
 
+    /**
+     * Converts a code from the WIN force activation method into readable text
+     * @param code the integer code returned from a WIN force activation method
+     * @return a String text describing what the code value means.
+     */
     private String activation(int code)
     {
         return switch (code) {
@@ -112,7 +122,12 @@ public class GameGUI
             default -> "Error";
         };
     }
-    
+
+    /**
+     * Converts a code from the WIN do battle method into readable text
+     * @param code the integer code returned from a WIN do battle method
+     * @return a String text describing what the code value means.
+     */
     private String fighting(int code)
     {
         switch (code)
@@ -124,7 +139,11 @@ public class GameGUI
         }
         return " no such fight ";
     }
-    
+
+    /**
+     * Sets listing to visible and its contents as a list of all forces in the UFF
+     * Function is called when the 'List All Forces' menu item is clicked
+     */
     private class ListForcesHandler implements ActionListener
     {
         public void actionPerformed(ActionEvent e) 
@@ -136,6 +155,10 @@ public class GameGUI
         }
     }
 
+    /**
+     * Sets listing to visible and its contents as a list of all forces in the ASF
+     * Function is called when the 'List ASF' menu item is clicked
+     */
     private class ListASFHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             listing.setVisible(true);
@@ -144,6 +167,13 @@ public class GameGUI
         }
     }
 
+    /**
+     * Displays an input text box to the user to enter a force fleet reference,
+     * attempts to activate the force with the provided force fleet reference,
+     * and shows a message displaying the result of this force activation attempt
+     * Function is called when the 'Activate Force' menu item is clicked.
+     * Nothing further happens if the user clicks 'Cancel' on the input box.
+     */
     private class ActivateForceHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String input = JOptionPane.showInputDialog("Enter the force's fleet reference: ");
@@ -155,6 +185,13 @@ public class GameGUI
         }
     }
 
+    /**
+     * Displays an input text box to the user to enter a force fleet reference,
+     * attempts to recall the force with the provided force fleet reference,
+     * and shows a message notifying the user that the program is attempting to recall the force
+     * Function is called when the 'Recall Force' menu item is clicked.
+     * Nothing further happens if the user clicks 'Cancel' on the input box.
+     */
     private class RecallForceHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String input = JOptionPane.showInputDialog("Enter the force's fleet reference: ");
@@ -168,6 +205,10 @@ public class GameGUI
         }
     }
 
+    /**
+     * Sets listing to visible and its content to a list of all battles held
+     * Function is called when the 'List Battles' menu item is clicked.
+     */
     private class ListBattlesHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             listing.setVisible(true);
@@ -175,9 +216,16 @@ public class GameGUI
             listing.setText(battlesDetails);
         }
     }
-    
-    
-    
+
+
+    /**
+     * Displays an input text box to the user to enter a battle number,
+     * attempts to fight this battle if the input is a valid integer,
+     * and displays a message showing the outcome of this battle in text.
+     * If the input provided by the user is NOT an integer, an error message is displayed and no battle is attempted
+     * Function is called when the 'Fight' button is clicked.
+     * Nothing further happens if the user clicks 'Cancel' on the input box.
+     */
     private class FightBtnHandler implements ActionListener
     {
         public void actionPerformed(ActionEvent e) 
@@ -199,6 +247,10 @@ public class GameGUI
         }
     }
 
+    /**
+     * Sets listing to visible and its contents to the state of the game
+     * Function is called when the 'View Game State' button is clicked
+     */
     private class ViewStateBtnHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             listing.setVisible(true);
@@ -207,14 +259,21 @@ public class GameGUI
         }
     }
 
+    /**
+     * Sets listing text to an empty string, clearing it
+     * Function is called when the 'Clear Screen' button is clicked
+     */
     private class ClearBtnHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             listing.setText(null);
         }
     }
-    
- 
-    
+
+
+    /**
+     * Runs the program
+     * @param args program arguments
+     */
     public static void main(String[] args)
     {
         new GameGUI();

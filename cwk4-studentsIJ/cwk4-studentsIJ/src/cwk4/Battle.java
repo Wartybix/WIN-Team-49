@@ -22,6 +22,10 @@ public class Battle implements Serializable{
         this.gains = gains;
     }
 
+    /**
+     * Returns a list of details (i.e. fields) about the battle
+     * @return a string containing a list of details (i.e. fields) about the battle
+     */
     @Override
     public String toString() {
         return "Battle number: " + battleNo +
@@ -32,26 +36,50 @@ public class Battle implements Serializable{
                 "\nPlayer gains: " + gains + " bit coins";
     }
 
+    /**
+     * Returns the battle's battle number
+     * @return an integer of the battle's battle number
+     */
     public int getBattleNo() {
         return battleNo;
     }
 
+    /**
+     * Returns whether the battle is an ambush, skirmish, or fight
+     * @return A BattleType value based on if the battle is an ambush, skirmish, or fight
+     */
     public BattleType getType() {
         return type;
     }
 
+    /**
+     * Returns the enemy's name
+     * @return a string containing the enemy's name
+     */
     public String getEnemyName() {
         return enemyName;
     }
 
+    /**
+     * Returns the strength of the enemy
+     * @return an integer of the strength of the enemy
+     */
     public int getEnemyStrength() {
         return enemyStrength;
     }
 
+    /**
+     * Returns how many bit coins the admiral loses if they lose the battle
+     * @return an integer representing the number of bit coins the admiral has deducted from their war chest if they lose the battle
+     */
     public int getLosses() {
         return losses;
     }
 
+    /**
+     * Returns how many bit coins the admiral gains if they win the battle
+     * @return an integer representing the number of bit coins the admiral has added to their war chest if they win the battle
+     */
     public int getGains() {
         return gains;
     }

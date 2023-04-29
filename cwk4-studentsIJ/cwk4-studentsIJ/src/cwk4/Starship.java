@@ -15,6 +15,10 @@ public class Starship extends Force {
         this.photonTorpedoes = photonTorpedoes;
     }
 
+    /**
+     * Returns generic force details with Starship specific details appended to it
+     * @return a String of generic force details with Starship specific details appended to it
+     */
     @Override
     public String toString() {
         return super.toString() +
@@ -22,10 +26,18 @@ public class Starship extends Force {
                 "\nPhoton torpedoes: " + photonTorpedoes;
     }
 
+    /**
+     * Returns the number of laser canons on the Starship
+     * @return integer number of laser canons on the Starship
+     */
     public int getLaserCanons() {
         return laserCanons;
     }
 
+    /**
+     * Returns the number of photon torpedoes on the Starship
+     * @return an integer number of photon torpedoes on the Starship
+     */
     public int getPhotonTorpedoes() {
         return photonTorpedoes;
     }

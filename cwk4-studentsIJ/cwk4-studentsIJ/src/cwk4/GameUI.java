@@ -11,6 +11,14 @@ public class GameUI
 {
     private Scanner myIn = new Scanner(System.in);
 
+    /**
+     * Provides a CLI for the user to be able to interact with the program
+     * User is firstly prompted to enter the admiral's name, and their input is stored
+     * User is then given a menu of game features/options to select from
+     * Upon selection, the user may be prompted for another input
+     * Appropriate information is outputted to the command line for each feature of the program
+     * The user is continuously asked to input values until they enter '0' at the main menu to quit the game
+     */
     private void playGame()
     {
         int choice;
@@ -97,7 +105,13 @@ public class GameUI
         }  
         System.out.println("Thank-you");
     }
-    
+
+    /**
+     * Displays a list of options for the user to choose from as a menu
+     * User is prompted to enter a value corresponding on one of these values, and their input is stored
+     * If the input is valid, this input is returned
+     * @return an integer representing the user's choice in the menu
+     */
     private int getMenuItem()
     {   
         int choice = 100;  
@@ -129,7 +143,12 @@ public class GameUI
         }
         return choice;        
     }
-    
+
+    /**
+     * Converts a code from the WIN force activation method into readable text
+     * @param code the integer code returned from a WIN force activation method
+     * @return a String text describing what the code value means.
+     */
     private String activation(int code)
     {
         switch (code)
@@ -141,7 +160,12 @@ public class GameUI
             default: return "Error";
         }
     }
-    
+
+    /**
+     * Converts a code from the WIN do battle method into readable text
+     * @param code the integer code returned from a WIN do battle method
+     * @return a String text describing what the code value means.
+     */
     private String battleTextResult(int code) {
         return switch (code) {
             case 0 -> "Battle won.";
@@ -152,7 +176,11 @@ public class GameUI
             default -> "Error";
         };
     }
-    
+
+    /**
+     * Runs the program
+     * @param args program arguments
+     */
     public static void main(String[] args)
     {
         GameUI myGame = new GameUI();

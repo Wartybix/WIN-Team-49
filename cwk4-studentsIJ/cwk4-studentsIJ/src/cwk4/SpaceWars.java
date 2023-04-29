@@ -16,7 +16,7 @@ public class SpaceWars implements WIN, Serializable
     private String admiralName;
     private int warChest = 1000;
 
-    private HashMap<String, Force> forces;
+    private HashMap<String, Force> forces; //Holds all forces including active, docked, and destroyed forces.
     private Battle[] battles;
 
 //**************** WIN **************************  
@@ -79,10 +79,11 @@ public class SpaceWars implements WIN, Serializable
         return warChest;
     }
     
-    /* Returns a list of all forces in the system by listing :
+    /** Returns a list of all forces in the system by listing :
      * All forces in the Active Star Fleet(ASF), or "No forces in ASF")
      * All forces remaining in the UFF dock, or "No forces in UFF dock
      * All forces destroyed as a result of losing a battle, or "No destroyed forces"
+     * @return String containing a grouped list of all forces
      */
     public String getAllForces()
     {
@@ -344,6 +345,11 @@ public class SpaceWars implements WIN, Serializable
 
     
     //*******************************************************************************
+
+    /**
+     * Re-initialises the forces collection
+     * Adds hardcoded Forces to the forces collection
+     */
     private void setupForces()
     {
         forces = new HashMap<String, Force>();
@@ -358,7 +364,10 @@ public class SpaceWars implements WIN, Serializable
         forces.put("WB9", new WarBird("WB9", "Hover", false, 400));
         forces.put("IW10", new Wing("IW10", "Flyer", 5));
     }
-    
+
+    /**
+     * Re-initialises the Battles collection to a hardcoded array of Battle items.
+     */
     private void setupBattles()
     {
         battles = new Battle[] {
@@ -376,6 +385,12 @@ public class SpaceWars implements WIN, Serializable
 
     
     //**************************Add your own private methos here ***********************
+
+    /**
+     * Takes a number and returns a battle with the battle number that corresponds to the given number
+     * @param num the battle number of the battle to return
+     * @return a Battle object matching the battle number passed
+     */
     private Battle findBattle(int num)
     {
         int index = num - 1;
@@ -387,8 +402,14 @@ public class SpaceWars implements WIN, Serializable
         return battles[index];
     }
 
+    /**
+     * Returns an array of Forces from the UFF (aka 'forces' collection) that has a state matching the state given
+     * For example, if ForceState.DESTROYED is passed, the method will return all destroyed forces in the UFF.
+     * @param state the ForceState to match forces to
+     * @return An array of forces with state matching the given state
+     */
     private Force[] getForceObjectsByState(ForceState state) {
-        ArrayList<Force> forceObjects = new ArrayList<Force>();
+        ArrayList<Force> forceObjects = new ArrayList<Force>(); //ArrayList used so that it can be incrementally added to.
 
         for (Force force : forces.values()) {
             if (force.getState() == state) {
@@ -397,20 +418,39 @@ public class SpaceWars implements WIN, Serializable
         }
 
         return forceObjects.toArray(new Force[forceObjects.size()]);
+        /*Return value is converted to an array as it is simpler, and does not need
+        expanding/shrinking after this method*/
     }
 
+    /**
+     * Returns all forces from the UFF which are active (aka., in the ASF)
+     * @return an array of forces from the UFF which are active (aka., in the ASF)
+     */
     private Force[] getASFObjects() {
         return getForceObjectsByState(ForceState.ACTIVE);
     }
 
+    /**
+     * Returns all forces from the UFF which are destroyed
+     * @return an array of forces from the UFF which are destroyed
+     */
     private Force[] getDestroyedForceObjects() {
         return getForceObjectsByState(ForceState.DESTROYED);
     }
 
+    /**
+     * Returns all forces from the UFF which are docked
+     * @return an array of forces from the UFF which are docked
+     */
     private Force[] getDockedForceObjects() {
         return getForceObjectsByState(ForceState.DOCKED);
     }
 
+    /**
+     * Returns the first force found from the UFF that can participate in the battle passed
+     * @param bat the battle to find the first suitable force for
+     * @return a Force object that matches criteria for the passed battl
+     */
     private Force matchForceToBattle(Battle bat)
     {
         if (bat.getType() == BattleType.AMBUSH) { return findActiveAmbusher(); }
@@ -422,7 +462,7 @@ public class SpaceWars implements WIN, Serializable
 
     /**
      * Finds first force in the ASF that can ambush.
-     * @return first force in the ASF that can ambush - otherwise null if no such force exists.
+     * @return first Force object in the ASF that can ambush - otherwise null if no such force exists.
      */
     private Force findActiveAmbusher() {
         Force[] activeForces = getASFObjects();
