@@ -24,7 +24,7 @@ public class GameUI
         int choice;
         System.out.print("Enter admiral's name: ");
         String s = myIn.nextLine();
-        WIN gp = new SpaceWars(s, "battles.txt");
+        WIN gp = new SpaceWars(s);
         choice = 100;
         while (choice != 0 )
         {
